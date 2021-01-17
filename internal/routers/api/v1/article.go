@@ -15,7 +15,9 @@ func NewArticle() Article {
 func (a Article) Get(c *gin.Context) {
 	app.NewResponse(c).ToErrorResponse(errcode.NotFound)
 }
-func (a Article) List(c *gin.Context)   {}
+func (a Article) List(c *gin.Context) {
+	app.NewResponse(c).ToErrorResponse(errcode.TooManyRequests)
+}
 func (a Article) Create(c *gin.Context) {}
 func (a Article) Update(c *gin.Context) {}
 func (a Article) Delete(c *gin.Context) {}
