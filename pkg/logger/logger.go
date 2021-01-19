@@ -179,11 +179,12 @@ func (l *Logger) Warnf(ctx context.Context, format string, v ...interface{}) {
 }
 
 func (l *Logger) Error(ctx context.Context, v ...interface{}) {
-	l.WithContext(ctx).WithTrace().Output(LevelError, fmt.Sprint(v...))
+	l.Output(LevelError, fmt.Sprint(v))
 }
 
 func (l *Logger) Errorf(ctx context.Context, format string, v ...interface{}) {
-	l.WithContext(ctx).WithTrace().Output(LevelError, fmt.Sprintf(format, v...))
+	// l.WithContext(ctx).WithTrace().Output(LevelError, fmt.Sprintf(format, v...))
+	l.Output(LevelError, fmt.Sprintf(format, v))
 }
 
 func (l *Logger) Fatal(ctx context.Context, v ...interface{}) {
