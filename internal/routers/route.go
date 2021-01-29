@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/sptuan/blog-service/docs"
 	v1 "github.com/sptuan/blog-service/internal/routers/api/v1"
+	"github.com/sptuan/blog-service/internal/routers/web"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -17,8 +18,10 @@ func NewRouter() *gin.Engine {
 	// swagger doc
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
+	// RESTful API
 	article := v1.NewArticle()
 	tag := v1.NewTag()
+
 	apiv1 := r.Group("/api/v1")
 	{
 		apiv1.POST("/tags", tag.Create)
@@ -34,5 +37,14 @@ func NewRouter() *gin.Engine {
 		apiv1.GET("/articles/:id", article.Get)
 		apiv1.GET("/articles", article.List)
 	}
+
+	// WEB interface
+	r.LoadHTMLGlob("internal/view/template/*")
+	page := web.NewPage()
+	webv1 := r.Group("/")
+	{
+		webv1.GET("/", page.Index)
+	}
+
 	return r
 }
