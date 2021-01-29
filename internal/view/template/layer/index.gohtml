@@ -1,0 +1,14 @@
+{{ define "index" }}
+    {{ template "header" . }}
+    <div class="k-main banner" style="background:#f5f5f5">
+        <div class="container">
+            <div class="row">
+
+                {{ template "toolbox_board" . }}
+                {{ template "list_board" . }}
+
+            </div>
+        </div>
+    </div>
+    {{ template "footer" . }}
+{{ end }}

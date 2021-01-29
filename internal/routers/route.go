@@ -39,7 +39,7 @@ func NewRouter() *gin.Engine {
 	}
 
 	// WEB interface
-	r.LoadHTMLGlob("internal/view/template/*")
+	r.LoadHTMLGlob("internal/view/template/*/*.gohtml")
 	page := web.NewPage()
 	webv1 := r.Group("/")
 	{
